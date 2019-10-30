@@ -2,7 +2,8 @@
 Pytorch source code for paper
 > Mroueh, Sercu, Rigotti, Padhi, dos Santos, "Sobolev Independence Criterion", NeurIPS 2019
 
-### Requirements
+
+## Requirements
 * Python 3.6 or above
 * PyTorch 1.1.0
 * Torchvision 0.3.0
@@ -15,7 +16,7 @@ These can be installed using `pip` by running:
 pip install -r requirements.txt
 ```
 
-### Usage
+## Usage
 
 We will look at the example of performing feature selection on one of the toy datasets examined in [Zhang et al., arXiv:1606.07892](https://arxiv.org/abs/1606.07892) (see sections 5.1 5.2) that we will call `SinExp`.
 
@@ -37,9 +38,10 @@ We will look at the example of performing feature selection on one of the toy da
   ```
 
 * The results can be plotted using the script `plot_results.py`, which will generate the following figure:
-  ![figure](/output/SINEXP_250.png)
-  Visualization of the results of executing the previous commands. We plot True Positive Rate (TPR, i.e. Power) and False Discovery Rate (FDR) for the three algorithms, indicating when FDR is controlled with HRT. Higher is better for TPR (blue bars), and lower is better for TPR (red bars)
 
+  ![figure](/output/SINEXP_250.png)
+  Visualization of the results of executing the previous commands. We plot True Positive Rate (TPR, i.e. Power) and False Discovery Rate (FDR) for the three algorithms, indicating when FDR is controlled with HRT. Higher is better for TPR (blue bars), and lower is better for TPR (red bars). The red horizontal dashed line indicates a TPR of 10%, which is what was used as target FDR for HRT. In this case SIC combined with HRT (bars on the right) has the highest TPR, while maintaining a low FDR.
+  
 
 ## Citation
 > Youssef Mroueh, Tom Sercu, Mattia Rigotti, Inkit Padhi, Cicero Dos Santos, "Sobolev Independence Criterion", NerIPS, 2019
