@@ -18,21 +18,20 @@ pip install -r requirements.txt
 
 ## Usage
 
-We will look at the example of performing feature selection on one of the toy datasets examined in [Zhang et al., arXiv:1606.07892](https://arxiv.org/abs/1606.07892) (see sections 5.1 5.2) that we will call `SinExp`.
+We will look at the example of performing *feature selection* on one of the toy datasets examined in [Zhang et al., arXiv:1606.07892](https://arxiv.org/abs/1606.07892) (see sections 5.1 5.2) that we will call `SinExp`.
 
-* To train an elastic net (one the implemented baseline models) on 250 samples from `SinExp` execute:
-
+* **Baseline models:** To train an *elastic net* (one of the implemented baseline models) on 250 samples from `SinExp` execute:
   ```bash
   python run_baselines.py --dataset sinexp --numSamples 250 --do-hrt
   ```
   The flag `--do-hrt` tells the script to use the Holdout Randomization Test by [Tansey et al., arXiv:1811.00645](https://arxiv.org/abs/1811.00645) to rank the important features in the data and control False Discovery Rate (FDR).
 
-* To train a multilayer neural network on the prediction problem of regressing the responses `y` on the inputs `X`, subject to gradient penalty (Sobolev penalty), again on 250 samples from `SinExp` execute:
+* **Multi-layer neural network regression with Sobolev penalty:** To train a multilayer neural network on the prediction problem of regressing the responses `y` on the inputs `X`, subject to gradient penalty (Sobolev penalty), again on 250 samples from `SinExp` execute:
   ```bash
   python run_sic_supervised.py --dataset sinexp --numSamples 250 --do-hrt
   ```
 
-* To train a multilayer discriminator network using the Sobolev Independence Criterion (SIC) between the responses `y` and the inputs `X` on 250 samples from `SinExp` execute:
+* **Sobolev Independence Criterion:** To train a multilayer discriminator network using the Sobolev Independence Criterion (SIC) between the responses `y` and the inputs `X` on 250 samples from `SinExp` execute:
   ```bash
   python run_sic.py --dataset sinexp --numSamples 250 --do-hrt
   ```
