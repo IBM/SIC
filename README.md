@@ -1,6 +1,6 @@
 # Sobolev Independence Criterion
 Pytorch source code for paper
-> Mroueh, Sercu, Rigotti, Padhi, dos Santos, "Sobolev Independence Criterion", NeurIPS 2019
+> Mroueh, Sercu, Rigotti, Padhi, dos Santos, "Sobolev Independence Criterion", NeurIPS 2019 [[arXiv:1910.14212](https://arxiv.org/abs/1910.14212)]
 
 
 ## Requirements
@@ -43,4 +43,4 @@ We will look at the example of performing *feature selection* on one of the toy 
   
 
 ## Citation
-> Youssef Mroueh, Tom Sercu, Mattia Rigotti, Inkit Padhi, Cicero Dos Santos, "Sobolev Independence Criterion", NerIPS, 2019
+> Youssef Mroueh, Tom Sercu, Mattia Rigotti, Inkit Padhi, Cicero Dos Santos, "Sobolev Independence Criterion", NeurIPS, 2019 [[arXiv](https://arxiv.org/abs/1910.14212)]
