@@ -1,6 +1,6 @@
 # Sobolev Independence Criterion
 Pytorch source code for paper
-> Mroueh, Sercu, Rigotti, Padhi, dos Santos, "Sobolev Independence Criterion", NeurIPS 2019
+> Mroueh, Sercu, Rigotti, Padhi, dos Santos, "Sobolev Independence Criterion", NeurIPS 2019 [[arXiv:1910.14212](https://arxiv.org/abs/1910.14212)] [[NeurIPS 2019 Proceedings]](https://papers.nips.cc/paper/9147-sobolev-independence-criterion)
 
 
 ## Requirements
@@ -43,4 +43,18 @@ We will look at the example of performing *feature selection* on one of the toy 
   
 
 ## Citation
-> Youssef Mroueh, Tom Sercu, Mattia Rigotti, Inkit Padhi, Cicero Dos Santos, "Sobolev Independence Criterion", NerIPS, 2019
+> Youssef Mroueh, Tom Sercu, Mattia Rigotti, Inkit Padhi, Cicero Dos Santos, "Sobolev Independence Criterion", NeurIPS, 2019 [[arXiv](https://arxiv.org/abs/1910.14212)] [[NeurIPS Proceedings]](https://papers.nips.cc/paper/9147-sobolev-independence-criterion)
+
+``` 
+@incollection{NIPS2019_9147,
+title = {Sobolev Independence Criterion},
+author = {Mroueh, Youssef and Sercu, Tom and Rigotti, Mattia and Padhi, Inkit and Nogueira dos Santos, Cicero},
+booktitle = {Advances in Neural Information Processing Systems 32},
+editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+pages = {9505--9515},
+year = {2019},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/9147-sobolev-independence-criterion.pdf}
+}
+```
+
