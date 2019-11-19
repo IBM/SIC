@@ -1,5 +1,6 @@
 from os import listdir
 from os.path import isdir, isfile, join
+from itertools import chain
 import numpy as np
 import matplotlib.pyplot as plt
 from utils import shelf
@@ -74,39 +75,65 @@ if __name__ == "__main__":
     # Load data
     PATH = 'output/'
     DIRS = [d for d in listdir(PATH) if isdir(join(PATH, d))]
-    FILES = [[join(PATH, d, f) for f in listdir(join(PATH, d))
-              if isfile(join(PATH, d, f)) and f[-3:]=='.pt'] for d in DIRS]
-    FIRST_FILE = [fs[0] for fs in FILES] # Only process first file in directory
+    FILES = [join(PATH, d, f) for d in DIRS for f in listdir(join(PATH, d))
+             if isfile(join(PATH, d, f)) and f[-3:]=='.pt']
 
-    ARGS, DAT = [], []
-    for f in FIRST_FILE:
+    ARGS, DAT, MODELS = [], [], []
+    for f in FILES:
         sh = shelf()._load(f)
         ARGS.append(sh.args)
         if 'd' in sh:
             DAT.append(sh['d'])
+            MODELS.append(sh.args['model'])
         else:
             print("WARNING: There is no data field d field in file {}. Skip.".format(f))
             continue
 
+    # ---------------------------
     # Process data
-    select_dict = 4*[{'model': 'en'}] + 2*[{'model': 'sic_supervised'}] + 2*[{'model': 'sic'}]
-    key_list = ['tpr_selected', 'fdr_selected'] + 6*['hrt_tpr_selected', 'hrt_fdr_selected']
+    # ---------------------------
+    select_dict, key_list, labels, positions, ax_labels, ax_positions = [], [], [], [-2], [], [-2]
+    # Baseline models
+    for m, l in zip(['en', 'rf'], ['Elastic Net', 'Random Forest']):
+        if m in MODELS:
+            select_dict += 4*[{'model': m}]
+            key_list += ['tpr_selected', 'fdr_selected', 'hrt_tpr_selected', 'hrt_fdr_selected']
+            labels += ['TPR', 'FDR', 'TPR\nHRT', 'FDR\nHRT']
+            p = positions[-1] + 2
+            positions += [1+p, 2+p,   4+p, 5+p]
+            ax_labels += [l]
+            ax_positions += [ax_positions[-1] + len(l)/2]
+
+    # Our models
+    for m, l, pos in zip(['sic_supervised', 'sic'], ['Sobolev Penalty', 'SIC'], [5.5, 4]):
+        if m in MODELS:
+            select_dict += 2*[{'model': m}]
+            key_list += ['hrt_tpr_selected', 'hrt_fdr_selected']
+            labels += ['TPR\nHRT', 'FDR\nHRT']
+            p = positions[-1] + 2
+            positions += [1+p, 2+p]
+            ax_labels += [l]
+            ax_positions += [ax_positions[-1] + pos]
+
+    positions.pop(0);
+    ax_positions.pop(0);
+
     data = get_data(select_dict, ARGS, key_list, DAT)
 
+    # ---------------------------
     # Plot
+    # ---------------------------
     dataset = ARGS[0]['dataset'].upper()
     n_samples = ARGS[0]['numSamples']
-    labels = ['TPR', 'FDR'] + 3*['TPR\nHRT', 'FDR\nHRT']
-    positions = [1, 2,   4, 5,   8, 9,   12, 13]
 
     fig = plt.figure(figsize=(8, 3))
     ax = plt.subplot(111)
 
     bplot = plt.boxplot(data, positions=positions, labels=labels, patch_artist=True)
-    label_axis(ax, ['Elastic Net', 'Sobolev penalty', 'SIC'], [3, 8.5 , 12.5], 32, fontsize=13)
-    color_bplot(bplot, 4*['lightblue', 'orange'])
+    label_axis(ax, ax_labels, ax_positions, 32, fontsize=13)
+    color_bplot(bplot, len(positions)//2*['lightblue', 'orange'])
 
     fig.suptitle(f'Dataset {dataset}, N={n_samples}');
 
     fig.tight_layout()
-    fig.savefig(f"output/{dataset}_{n_samples}.pdf", bbox_inches='tight')
+    fig.savefig(f"output/{dataset}_{n_samples}.png", bbox_inches='tight')
