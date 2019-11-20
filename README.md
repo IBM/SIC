@@ -29,7 +29,7 @@ We will look at the example of performing *feature selection* on one of the toy 
     ```bash
     python run_baselines.py --model rf --dataset sinexp --numSamples 250 --do-hrt
     ```
-  The flag `--do-hrt` tells the script to use the Holdout Randomization Test by [Tansey et al., arXiv:1811.00645](https://arxiv.org/abs/1811.00645) to rank the important features in the data and control False Discovery Rate (FDR).    
+    The flag `--do-hrt` tells the script to use the Holdout Randomization Test by [Tansey et al., arXiv:1811.00645](https://arxiv.org/abs/1811.00645) to rank the important features in the data and control False Discovery Rate (FDR).    
 
 * **Multi-layer neural network regression with Sobolev penalty:** To train a multilayer neural network on the prediction problem of regressing the responses `y` on the inputs `X`, subject to gradient penalty (Sobolev penalty), again on 250 samples from `SinExp` execute:
   ```bash
